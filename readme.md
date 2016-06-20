@@ -15,11 +15,11 @@ It is just for a sample
 
 
 ## PUBLIC FUNCTION USED :
-1) hexdigest - Creates an hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
-2) digest - Creates an digested version of the fullstophash (WITHOUT SALT STRING)
-3) b64hexdigest - Base64 encoded Hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
-4) b64digest - Base64 encoded digested version of the fullstophash (WITHOUT SALT STRING)
-5) hexdigest_encrypt - Creates an hexadecimal representation of the fullstophash (WITH SALT STRING)
-6) digest_encrypt - Creates an digested version of the fullstophash (WITH SALT STRING)
-7) b64hexdigest_encrypt - Base64 encoded Hexadecimal representation of the fullstophash (WITH SALT STRING)
-8) b64digest_encrypt - Base64 encoded digested version of the fullstophash (WITH SALT STRING)
+1) hexdigest - Creates an hexadecimal representation of the fullstophash (WITHOUT SALT STRING)  
+2) digest - Creates an digested version of the fullstophash (WITHOUT SALT STRING)  
+3) b64hexdigest - Base64 encoded Hexadecimal representation of the fullstophash (WITHOUT SALT STRING)  
+4) b64digest - Base64 encoded digested version of the fullstophash (WITHOUT SALT STRING)  
+5) hexdigest_encrypt - Creates an hexadecimal representation of the fullstophash (WITH SALT STRING)  
+6) digest_encrypt - Creates an digested version of the fullstophash (WITH SALT STRING)  
+7) b64hexdigest_encrypt - Base64 encoded Hexadecimal representation of the fullstophash (WITH SALT STRING)  
+8) b64digest_encrypt - Base64 encoded digested version of the fullstophash (WITH SALT STRING)  
