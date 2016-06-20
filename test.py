@@ -1,6 +1,9 @@
 from fullstophash import *
-
-print "Digest of Sambit is : " + fullstophash.digest("Sambit")+"\n"
-print "HexDigest of Sambit is : " + fullstophash.hexdigest("Sambit")+"\n"
-print "Base64 encode of the Digest of Sambit is : " + fullstophash.b64digest("Sambit")+"\n"
-print "Base64 encode of the HexDigest of Sambit is : " + fullstophash.b64hexdigest("Sambit")+"\n"
+#print fullstophash.digest("Sambit")+"\n"
+print fullstophash.hexdigest('Sambit')+'\n'	
+print fullstophash.hexdigest_encrypt('Sambit')+'\n'	
+#print len(fullstophash.hexdigest("Sambit"))
+#print fullstophash.b64digest("Sambit")+"\n"
+#print fullstophash.b64hexdigest("Sambit")+"\n"
+#print fullstophash('Sambit').fullstopdigest([sha1])+"\n"
+#print hashlib.md5("").hexdigest()
