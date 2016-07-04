@@ -105,3 +105,4 @@ class fullstophash:
 		DestHash = fullstophash.maincrypter(SrcString + salt)
 		DestHash = fullstophash.maincoder(DestHash)
 		return str(DestHash)
+#ENDS ENCODED + ENCRYPTED + SALTED
