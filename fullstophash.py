@@ -13,20 +13,21 @@ USES
 PUBLIC FUNCTION USED :
 1) hexdigest - Creates an hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
 2) digest - Creates an digested version of the fullstophash (WITHOUT SALT STRING)
-3) hexdigest_encoded - Base64 encoded Hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
-4) digest_encoded - Base64 encoded digested version of the fullstophash (WITHOUT SALT STRING)
+3) hexdigest_encoded - Encoded Hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
+4) digest_encoded - Encoded digested version of the fullstophash (WITHOUT SALT STRING)
 5) hexdigest_crypted - Creates an hexadecimal representation of the fullstophash (WITH SALT STRING)
 6) digest_crypted - Creates an digested version of the fullstophash (WITH SALT STRING)
-7) b64hexdigest_encrypted - Base64 encoded Hexadecimal representation of the fullstophash (WITH SALT STRING)
-8) b64digest_encrypted - Base64 encoded digested version of the fullstophash (WITH SALT STRING)
+7) hexdigest_encrypted - Base64 encoded Hexadecimal representation of the fullstophash (WITH SALT STRING)
+8) digest_encrypted - Base64 encoded digested version of the fullstophash (WITH SALT STRING)
 
 '''
 
 import hashlib
 import base64
+import base91
 class fullstophash:
 	@staticmethod
-	def mainhexdigest(SrcString):
+	def mainhexcrypter(SrcString):
 		DestHash = str(SrcString)
 		DestHash = hashlib.md5(DestHash).hexdigest()
 		DestHash = hashlib.sha1(DestHash).hexdigest()
@@ -36,7 +37,7 @@ class fullstophash:
 		DestHash = hashlib.sha512(DestHash).hexdigest()
 		return str(DestHash)
 	@staticmethod
-	def maindigest(SrcString):
+	def maincrypter(SrcString):
 		DestHash = str(SrcString)
 		DestHash = hashlib.md5(DestHash + salt).digest()
 		DestHash = hashlib.sha1(DestHash + salt).digest()
@@ -45,54 +46,62 @@ class fullstophash:
 		DestHash = hashlib.sha256(DestHash + salt).digest()
 		DestHash = hashlib.sha512(DestHash + salt).digest()
 		return str(DestHash)
-		
 	@staticmethod
-	def hexdigest_encrypt(SrcString):
-		salt = fullstophash.mainhexdigest(SrcString)
-		DestHash = fullstophash.mainhexdigest(SrcString + salt)
-		return str(DestHash)
-	
-	@staticmethod
-	def digest_encrypt(SrcString):
-		salt = fullstophash.maindigest(SrcString)
-		DestHash = fullstophash.maindigest(SrcString + salt)
-		return str(DestHash)
-		
-	@staticmethod
-	def b64digest_encrypt(SrcString):
-		salt = fullstophash.maindigest(SrcString)
-		salt = base64.b64encode(salt)
-		DestHash = fullstophash.maindigest(SrcString + salt)
-		DestHash = base64.b64encode(DestHash)
-		return str(DestHash)
-		
-	@staticmethod
-	def b64hexdigest_encrypt(SrcString):
-		salt = fullstophash.mainhexdigest(SrcString)
-		salt = base64.b64encode(salt)
-		DestHash = fullstophash.mainhexdigest(SrcString + salt)
-		DestHash = base64.b64encode(DestHash)
-		return str(DestHash)
-
+	def maincoder(SrcString):
+		DestCode = str(SrcString)
+		DestCode = base91.b91encode(DestCode)
+		DestCode = base64.b64encode(DestCode)
+		return str(DestCode)
+#BEGINS NORMAL ENCRYPTION
 	@staticmethod
 	def hexdigest(SrcString):
-		DestHash = fullstophash.mainhexdigest(SrcString)
+		DestHash = fullstophash.mainhexcrypter(SrcString)
 		return str(DestHash)
 
 	@staticmethod
 	def digest(SrcString):
-		DestHash = fullstophash.maindigest(SrcString)
+		DestHash = fullstophash.maincrypter(SrcString)
 		return str(DestHash)
-
+#ENDS NORMAL ENCRYPTION
+#BEGINS NORMAL ENCODER (ENCRYPTION + ENCODER WITHOUT SALT)
 	@staticmethod
-	def b64digest(SrcString):
-		DestHash = fullstophash.maindigest(SrcString)
-		DestHash = base64.b64encode(DestHash)
+	def digest_encoded(SrcString):
+		DestHash = fullstophash.maincrypter(SrcString)
+		DestHash = fullstophash.maincoder(DestHash)
 		return str(DestHash)
-
+	
 	@staticmethod
-	def b64hexdigest(SrcString):
-		DestHash = fullstophash.mainhexdigest(SrcString)
-		DestHash = base64.b64encode(DestHash)
+	def hexdigest_encoded(SrcString):
+		DestHash = fullstophash.maincrypter(SrcString)
+		DestHash = fullstophash.maincoder(DestHash)
 		return str(DestHash)
- 
+#ENDS NORMAL ENCODER (ENCRYPTION + ENCODER WITHOUT SALT)
+#BEGINS SALTED ENCRYPTION
+	@staticmethod
+	def digest_crypted(SrcString):
+		salt = fullstophash.maindigest(SrcString)
+		DestHash = fullstophash.maindigest(SrcString + salt)
+		return str(DestHash)
+	
+	@staticmethod
+	def hexdigest_crypted(SrcString):
+		salt = fullstophash.mainhexdigest(SrcString)
+		DestHash = fullstophash.mainhexdigest(SrcString + salt)
+		return str(DestHash)
+#ENDS SALTED ENCYPTION
+#BEGINS ENCODED + ENCRYPTED + SALTED
+	@staticmethod
+	def digest_encrypted(SrcString):
+		salt = fullstophash.maindigest(SrcString)
+		salt = fullstophash.maincoder(salt)
+		DestHash = fullstophash.maindigest(SrcString + salt)
+		DestHash = fullstophash.maincoder(DestHash)
+		return str(DestHash)
+		
+	@staticmethod
+	def hexdigest_encrypted(SrcString):
+		salt = fullstophash.mainhexdigest(SrcString)
+		salt = fullstophash.maincoder(salt)
+		DestHash = fullstophash.maincrypter(SrcString + salt)
+		DestHash = fullstophash.maincoder(DestHash)
+		return str(DestHash)
