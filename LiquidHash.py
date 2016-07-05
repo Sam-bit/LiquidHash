@@ -25,7 +25,7 @@ PUBLIC FUNCTION USED :
 import hashlib
 import base64
 import base91
-class fullstophash:
+class liquidhash:
 	@staticmethod
 	def mainhexcrypter(SrcString):
 		DestHash = str(SrcString)
