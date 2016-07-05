@@ -1,4 +1,4 @@
-# FullStopHash
+# LiquidHash
 * Create a single hash string by using multiple hash function.
 This program is used to create a hash string by using multiple hash function.
 
