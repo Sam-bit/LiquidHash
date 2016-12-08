@@ -11,14 +11,14 @@ USES
 * Creates an UNBREAKABLE AND UNCRACKABLE, STILL UNIQUE hash string of variable digest size and length based on the outermost hash algorithm used (In our case the message length, the digest size and block size is equal to that of sha512). Thus it becomes unpredictable for the crackers if SENSITIVE PASSWORDS are stored using MY FullStopHash
 
 PUBLIC FUNCTION USED :
-1) hexdigest - Creates an hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
-2) digest - Creates an digested version of the fullstophash (WITHOUT SALT STRING)
-3) hexdigest_encoded - Encoded Hexadecimal representation of the fullstophash (WITHOUT SALT STRING)
-4) digest_encoded - Encoded digested version of the fullstophash (WITHOUT SALT STRING)
-5) hexdigest_crypted - Creates an hexadecimal representation of the fullstophash (WITH SALT STRING)
-6) digest_crypted - Creates an digested version of the fullstophash (WITH SALT STRING)
-7) hexdigest_encrypted - Base64 encoded Hexadecimal representation of the fullstophash (WITH SALT STRING)
-8) digest_encrypted - Base64 encoded digested version of the fullstophash (WITH SALT STRING)
+1) hexdigest - Creates an hexadecimal representation of the liquidhash (WITHOUT SALT STRING)
+2) digest - Creates an digested version of the liquidhash (WITHOUT SALT STRING)
+3) hexdigest_encoded - Encoded Hexadecimal representation of the liquidhash (WITHOUT SALT STRING)
+4) digest_encoded - Encoded digested version of the liquidhash (WITHOUT SALT STRING)
+5) hexdigest_crypted - Creates an hexadecimal representation of the liquidhash (WITH SALT STRING)
+6) digest_crypted - Creates an digested version of the liquidhash (WITH SALT STRING)
+7) hexdigest_encrypted - Base64 encoded Hexadecimal representation of the liquidhash (WITH SALT STRING)
+8) digest_encrypted - Base64 encoded digested version of the liquidhash (WITH SALT STRING)
 
 '''
 
