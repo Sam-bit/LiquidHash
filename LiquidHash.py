@@ -24,85 +24,85 @@ PUBLIC FUNCTION USED :
 
 import hashlib
 import base64
-import base91
+from base91 import base91
 class liquidhash:
-	@staticmethod
-	def mainhexcrypter(SrcString):
-		DestHash = str(SrcString)
-		DestHash = hashlib.md5(DestHash).hexdigest()
-		DestHash = hashlib.sha1(DestHash).hexdigest()
-		DestHash = hashlib.sha224(DestHash).hexdigest()
-		DestHash = hashlib.sha384(DestHash).hexdigest()
-		DestHash = hashlib.sha256(DestHash).hexdigest()
-		DestHash = hashlib.sha512(DestHash).hexdigest()
-		return str(DestHash)
-	@staticmethod
-	def maincrypter(SrcString):
-		DestHash = str(SrcString)
-		DestHash = hashlib.md5(DestHash + salt).digest()
-		DestHash = hashlib.sha1(DestHash + salt).digest()
-		DestHash = hashlib.sha224(DestHash + salt).digest()
-		DestHash = hashlib.sha384(DestHash + salt).digest()
-		DestHash = hashlib.sha256(DestHash + salt).digest()
-		DestHash = hashlib.sha512(DestHash + salt).digest()
-		return str(DestHash)
-	@staticmethod
-	def maincoder(SrcString):
-		DestCode = str(SrcString)
-		DestCode = base91.b91encode(DestCode)
-		DestCode = base64.b64encode(DestCode)
-		return str(DestCode)
+    @staticmethod
+    def mainhexcrypter(SrcString,salt = ""):
+       DestHash = bytes(str(SrcString), encoding="ascii")
+       DestHash = bytes(hashlib.md5(DestHash).hexdigest(), encoding="ascii")
+       DestHash = bytes(hashlib.sha1(DestHash).hexdigest(), encoding="ascii")
+       DestHash = bytes(hashlib.sha224(DestHash).hexdigest(), encoding="ascii")
+       DestHash = bytes(hashlib.sha384(DestHash).hexdigest(), encoding="ascii")
+       DestHash = bytes(hashlib.sha256(DestHash).hexdigest(), encoding="ascii")
+       DestHash = bytes(hashlib.sha512(DestHash).hexdigest(), encoding="ascii")
+       return str(DestHash)
+    @staticmethod
+    def maincrypter(SrcString,salt = ""):
+       DestHash = bytes(str(SrcString + salt), encoding="ascii")
+       DestHash = hashlib.md5(DestHash).digest()
+       DestHash = hashlib.sha1(DestHash).digest()
+       DestHash = hashlib.sha224(DestHash).digest()
+       DestHash = hashlib.sha384(DestHash).digest()
+       DestHash = hashlib.sha256(DestHash).digest()
+       DestHash = hashlib.sha512(DestHash).digest()
+       return str(DestHash)
+    @staticmethod
+    def maincoder(SrcString):
+       DestCode = SrcString.encode('ascii')
+       DestCode = base91.b91encode(DestCode).encode('ascii')
+       DestCode = base64.b64encode(DestCode)
+       return str(DestCode)
 #BEGINS NORMAL ENCRYPTION
-	@staticmethod
-	def hexdigest(SrcString):
-		DestHash = liquidhash.mainhexcrypter(SrcString)
-		return str(DestHash)
+    @staticmethod
+    def hexdigest(SrcString):
+       DestHash = liquidhash.mainhexcrypter(SrcString)
+       return str(DestHash)
 
-	@staticmethod
-	def digest(SrcString):
-		DestHash = liquidhash.maincrypter(SrcString)
-		return str(DestHash)
+    @staticmethod
+    def digest(SrcString):
+       DestHash = liquidhash.maincrypter(SrcString)
+       return str(DestHash)
 #ENDS NORMAL ENCRYPTION
 #BEGINS NORMAL ENCODER (ENCRYPTION + ENCODER WITHOUT SALT)
-	@staticmethod
-	def digest_encoded(SrcString):
-		DestHash = liquidhash.maincrypter(SrcString)
-		DestHash = liquidhash.maincoder(DestHash)
-		return str(DestHash)
-	
-	@staticmethod
-	def hexdigest_encoded(SrcString):
-		DestHash = liquidhash.maincrypter(SrcString)
-		DestHash = liquidhash.maincoder(DestHash)
-		return str(DestHash)
+    @staticmethod
+    def digest_encoded(SrcString):
+       DestHash = liquidhash.maincrypter(SrcString)
+       DestHash = liquidhash.maincoder(DestHash)
+       return str(DestHash)
+    
+    @staticmethod
+    def hexdigest_encoded(SrcString):
+       DestHash = liquidhash.maincrypter(SrcString)
+       DestHash = liquidhash.maincoder(DestHash)
+       return str(DestHash)
 #ENDS NORMAL ENCODER (ENCRYPTION + ENCODER WITHOUT SALT)
 #BEGINS SALTED ENCRYPTION
-	@staticmethod
-	def digest_crypted(SrcString):
-		salt = liquidhash.maindigest(SrcString)
-		DestHash = liquidhash.maindigest(SrcString + salt)
-		return str(DestHash)
-	
-	@staticmethod
-	def hexdigest_crypted(SrcString):
-		salt = liquidhash.mainhexdigest(SrcString)
-		DestHash = liquidhash.mainhexdigest(SrcString + salt)
-		return str(DestHash)
+    @staticmethod
+    def digest_crypted(SrcString):
+       salt = liquidhash.digest(SrcString)
+       DestHash = liquidhash.digest(SrcString + salt)
+       return str(DestHash)
+    
+    @staticmethod
+    def hexdigest_crypted(SrcString):
+       salt = liquidhash.hexdigest(SrcString)
+       DestHash = liquidhash.hexdigest(SrcString + salt)
+       return str(DestHash)
 #ENDS SALTED ENCYPTION
 #BEGINS ENCODED + ENCRYPTED + SALTED
-	@staticmethod
-	def digest_encrypted(SrcString):
-		salt = liquidhash.maindigest(SrcString)
-		salt = liquidhash.maincoder(salt)
-		DestHash = liquidhash.maindigest(SrcString + salt)
-		DestHash = liquidhash.maincoder(DestHash)
-		return str(DestHash)
-		
-	@staticmethod
-	def hexdigest_encrypted(SrcString):
-		salt = liquidhash.mainhexdigest(SrcString)
-		salt = liquidhash.maincoder(salt)
-		DestHash = liquidhash.maincrypter(SrcString + salt)
-		DestHash = liquidhash.maincoder(DestHash)
-		return str(DestHash)
+    @staticmethod
+    def digest_encrypted(SrcString):
+       salt = liquidhash.digest(SrcString)
+       salt = liquidhash.maincoder(salt)
+       DestHash = liquidhash.digest(SrcString + salt)
+       DestHash = liquidhash.maincoder(DestHash)
+       return str(DestHash)
+       
+    @staticmethod
+    def hexdigest_encrypted(SrcString):
+       salt = liquidhash.hexdigest(SrcString)
+       salt = liquidhash.maincoder(salt)
+       DestHash = liquidhash.maincrypter(SrcString + salt)
+       DestHash = liquidhash.maincoder(DestHash)
+       return str(DestHash)
 #ENDS ENCODED + ENCRYPTED + SALTED
